@@ -91,7 +91,6 @@
       const peso = document.getElementById("peso");
       const imagen = document.getElementById("imagen");
 
-      // Detecta el envío del formulario y prepara la búsqueda.
       formulario.addEventListener("submit", (event) => {
         event.preventDefault();
         obtenerPokemon(idPokemon.value.toLowerCase().trim());
