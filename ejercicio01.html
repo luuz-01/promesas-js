@@ -1,0 +1,129 @@
+<!-- Buscador de planetas, ingresar el ID y retornar 5 campos -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buscador de planetas de Star Wars</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/comun.css" />
+    <link rel="stylesheet" href="css/planetas-star-wars.css" />
+  </head>
+  <body>
+    <!-- CAPA 1: estructura HTML del buscador y sus resultados -->
+    <main class="pagina container">
+      <section class="tarjeta card shadow-lg">
+        <header class="encabezado-card card-header">
+          <div class="encabezado-contenido">
+            <div>
+              <span class="etiqueta-tema">STAR WARS · EXPLORACIÓN</span>
+              <h1>Buscador de planetas</h1>
+              <p>Ingresa el ID para consultar los datos de un planeta.</p>
+            </div>
+            <img src="images/starwars_logo.png" class="espacio-logo" alt="">
+          </div>
+        </header>
+        <div class="card-body">
+          <form action="" id="formBuscador" class="formulario">
+            <label for="idplaneta" class="form-label">ID del planeta</label>
+            <div class="input-group mb-4">
+              <span class="input-group-text">#</span>
+              <input
+                class="form-control"
+                type="text"
+                id="idplaneta"
+                placeholder="Ejemplo: 1"
+              />
+              <button class="btn btn-tema" type="submit">Buscar</button>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label
+                ><input class="form-control" type="text" id="nombre" readonly />
+              </div>
+              <div class="col-md-6">
+                <label for="gravedad" class="form-label">Gravedad</label
+                ><input
+                  class="form-control"
+                  type="text"
+                  id="gravedad"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="poblacion" class="form-label">Población</label
+                ><input
+                  class="form-control"
+                  type="text"
+                  id="poblacion"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="clima" class="form-label">Clima</label
+                ><input class="form-control" type="text" id="clima" readonly />
+              </div>
+              <div class="col-12">
+                <label for="terreno" class="form-label">Tipo de terreno</label
+                ><input
+                  class="form-control"
+                  type="text"
+                  id="terreno"
+                  readonly
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script>
+      // CAPA 2: referencias a los elementos y evento de búsqueda.
+      const formulario = document.getElementById("formBuscador");
+      const id = document.getElementById("idplaneta");
+      const nombre = document.getElementById("nombre");
+      const gravedad = document.getElementById("gravedad");
+      const poblacion = document.getElementById("poblacion");
+      const clima = document.getElementById("clima");
+
+      formulario.addEventListener("submit", (event) => {
+        event.preventDefault(); // Detener el envío
+        obtenerPlaneta(id.value);
+      });
+
+      // CAPA 3: consulta la API de Star Wars y revisa la respuesta.
+      async function obtenerPlaneta(id) {
+        const API_URL = `https://swapi.dev/api/planets/${id}`;
+
+        try {
+          const respuesta = await fetch(API_URL);
+
+          if (!respuesta.ok) {
+            nombre.value = "";
+            gravedad.value = "";
+            poblacion.value = "";
+            clima.value = "";
+            document.getElementById("terreno").value = "";
+
+            alert("No existe este planeta");
+            return;
+          }
+
+          const datos = await respuesta.json();
+
+          // CAPA 4: coloca los datos recibidos en los campos del formulario.
+          nombre.value = datos.name;
+          gravedad.value = datos.gravity;
+          poblacion.value = datos.population;
+          clima.value = datos.climate;
+          document.getElementById("terreno").value = datos.terrain;
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    </script>
+  </body>
+</html>

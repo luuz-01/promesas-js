@@ -1,0 +1,179 @@
+/* CAPA 1: ajustes generales que comparten todas las páginas */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 48px 16px;
+  font-family: Arial, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  background-image: radial-gradient(circle at top, var(--brillo), transparent 38%);
+}
+
+/* CAPA 2: tamaño y posición de la tarjeta principal */
+.pagina {
+  max-width: 760px;
+}
+
+/* CAPA 3: encabezado y espacio reservado para el logo */
+.encabezado-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.espacio-logo {
+  display: grid;
+  width: 150px;
+  height: 100px;
+  flex: 0 0 150px;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  color: var(--texto-suave);
+  background: transparent;
+  font-size: 0.85rem;
+}
+
+.tarjeta {
+  overflow: hidden;
+  border: 1px solid var(--acento);
+  border-radius: 16px;
+  background: var(--panel);
+}
+
+.encabezado-card {
+  padding: 26px 30px;
+  border: 0;
+  border-bottom: 1px solid var(--borde);
+  background: var(--encabezado);
+}
+
+.etiqueta-tema {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--acento);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0 0 8px;
+  color: var(--texto);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+}
+
+.encabezado-card p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.card-body {
+  padding: 28px 30px 32px;
+}
+
+/* CAPA 4: etiquetas, campos, botones e imagen de resultados */
+.form-label {
+  margin-bottom: 6px;
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.form-control,
+.input-group-text {
+  min-height: 44px;
+  border-color: var(--borde);
+}
+
+.form-control:focus {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 0.2rem var(--anillo);
+}
+
+.form-control[readonly] {
+  background-color: var(--campo);
+  color: var(--texto);
+  opacity: 1;
+}
+
+.input-group-text {
+  background: var(--campo);
+  color: var(--acento);
+  font-weight: bold;
+}
+
+.btn-tema {
+  padding-right: 22px;
+  padding-left: 22px;
+  border-color: var(--acento);
+  background: var(--acento);
+  color: var(--boton-texto);
+  font-weight: bold;
+}
+
+.btn-tema:hover,
+.btn-tema:focus {
+  border-color: var(--acento);
+  background: var(--acento-hover);
+  color: var(--boton-texto);
+}
+
+.marco-imagen {
+  display: grid;
+  min-height: 190px;
+  place-items: center;
+  padding: 12px;
+  border: 1px dashed var(--acento);
+  border-radius: 12px;
+  background: var(--campo);
+}
+
+#imagen {
+  width: 100%;
+  max-width: 170px;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* CAPA 5: ajustes de pantalla para celulares */
+@media (max-width: 520px) {
+  body {
+    padding: 22px 12px;
+  }
+
+  .encabezado-card,
+  .card-body {
+    padding: 22px 18px;
+  }
+
+  .encabezado-contenido {
+    gap: 10px;
+  }
+
+  .espacio-logo {
+    width: 90px;
+    height: 70px;
+    flex-basis: 90px;
+    font-size: 0.75rem;
+  }
+
+  .input-group {
+    flex-wrap: wrap;
+  }
+
+  .input-group .form-control {
+    min-width: 0;
+  }
+
+  .input-group .btn {
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 6px !important;
+  }
+}

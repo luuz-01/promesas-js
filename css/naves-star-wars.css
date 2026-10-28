@@ -1,0 +1,19 @@
+/* CAPA 1: colores metálicos y dorados del tema de naves */
+:root {
+  --fondo: #17191c;
+  --brillo: #51401a;
+  --panel: #24282d;
+  --encabezado: #30353b;
+  --campo: #1b1e22;
+  --texto: #f5f3ed;
+  --texto-suave: #c4c0b5;
+  --acento: #e0b84f;
+  --acento-hover: #f0ce70;
+  --borde: #575047;
+  --anillo: #e0b84f44;
+  --boton-texto: #211a0a;
+}
+
+/* CAPA 2: las medidas y componentes vienen del CSS común */
+
+

@@ -1,0 +1,27 @@
+/* CAPA 1: colores rojo y crema del tema de Pokémon */
+:root {
+  --fondo: #20191b;
+  --brillo: #7c2027;
+  --panel: #fffaf7;
+  --encabezado: #fff0ed;
+  --campo: #fffdfb;
+  --texto: #302124;
+  --texto-suave: #765e61;
+  --acento: #d93642;
+  --acento-hover: #ed5964;
+  --borde: #e5b9bb;
+  --anillo: #d9364244;
+  --boton-texto: #ffffff;
+}
+
+.marco-imagen {
+  /* CAPA 2: fondo y tamaño de la ilustración del Pokémon */
+  background: linear-gradient(145deg, #ffffff, #ffe9e8);
+}
+
+.marco-imagen img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}

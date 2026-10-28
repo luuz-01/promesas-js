@@ -1,0 +1,149 @@
+<!-- Ejercicio 04: Buscador de Pokémon -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buscador de Pokémon</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/comun.css" />
+    <link rel="stylesheet" href="css/pokemon.css" />
+  </head>
+  <body>
+    <!-- CAPA 1: estructura HTML del buscador, resultados e imagen -->
+    <main class="pagina container">
+      <section class="tarjeta card shadow-lg">
+        <header class="encabezado-card card-header">
+          <div class="encabezado-contenido">
+            <div>
+              <span class="etiqueta-tema">POKÉMON · POKÉDEX</span>
+              <h1>Buscador de Pokémon</h1>
+              <p>Ingresa el ID o nombre para consultar los datos de un Pokémon.</p>
+            </div>
+            <img src="images/pokemon_logo.png" class="espacio-logo" alt="">
+            
+          </div>
+        </header>
+        <div class="card-body">
+          <form id="formBuscador" class="formulario">
+            <label for="idpokemon" class="form-label">ID o nombre del Pokémon</label>
+            <div class="input-group mb-4">
+              <span class="input-group-text">#</span>
+              <input
+                class="form-control"
+                type="text"
+                id="idpokemon"
+                placeholder="Ejemplo: 25, pikachu"
+                required
+              />
+              <button class="btn btn-tema" type="submit">Buscar</button>
+            </div>
+            <div class="row g-3 align-items-start">
+              <div class="col-12">
+                <label for="nombre" class="form-label">Nombre</label
+                ><input class="form-control" type="text" id="nombre" readonly />
+              </div>
+              <div class="col-md-6">
+                <label for="tipo" class="form-label">Tipo principal</label
+                ><input class="form-control" type="text" id="tipo" readonly />
+              </div>
+              <div class="col-md-6">
+                <label for="experiencia" class="form-label"
+                  >Experiencia base</label
+                ><input
+                  class="form-control"
+                  type="text"
+                  id="experiencia"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="altura" class="form-label">Altura</label
+                ><input class="form-control" type="text" id="altura" readonly />
+              </div>
+              <div class="col-md-6">
+                <label for="peso" class="form-label">Peso</label
+                ><input class="form-control" type="text" id="peso" readonly />
+              </div>
+              <div class="col-12">
+                <span class="form-label d-block">Ilustración oficial</span>
+                <div class="marco-imagen">
+                  <img id="imagen" alt="Imagen del Pokémon" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // CAPA 2: referencias a los elementos y evento de búsqueda.
+      const formulario = document.getElementById("formBuscador");
+      const idPokemon = document.getElementById("idpokemon");
+      const nombre = document.getElementById("nombre");
+      const tipo = document.getElementById("tipo");
+      const experiencia = document.getElementById("experiencia");
+      const altura = document.getElementById("altura");
+      const peso = document.getElementById("peso");
+      const imagen = document.getElementById("imagen");
+
+      // Detecta el envío del formulario y prepara la búsqueda.
+      formulario.addEventListener("submit", (event) => {
+        event.preventDefault();
+        obtenerPokemon(idPokemon.value.toLowerCase().trim());
+      });
+
+      // CAPA 3: limpia los datos anteriores cuando la búsqueda falla.
+      function limpiarCampos() {
+        nombre.value = "";
+        tipo.value = "";
+        experiencia.value = "";
+        altura.value = "";
+        peso.value = "";
+        imagen.removeAttribute("src");
+      }
+
+      // CAPA 4: consulta la PokéAPI y coloca sus resultados en la página.
+      async function obtenerPokemon(id) {
+        if (!id) {
+          alert("Escribe el ID de un Pokémon.");
+          return;
+        }
+
+        const API_URL = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+        try {
+          const respuesta = await fetch(API_URL);
+
+          if (!respuesta.ok) {
+            limpiarCampos();
+            alert("No se encontró este Pokémon.");
+            return;
+          }
+
+          const datos = await respuesta.json();
+
+          // Asigna los datos recibidos y la ilustración oficial.
+          nombre.value = datos.name;
+          tipo.value = datos.types[0].type.name;
+          experiencia.value = `${datos.base_experience} puntos`;
+          altura.value = `${datos.height / 10} m`;
+          peso.value = `${datos.weight / 10} kg`;
+          imagen.src =
+            datos.sprites.other["official-artwork"].front_default ||
+            datos.sprites.front_default ||
+            "";
+          imagen.alt = `Ilustración oficial de ${datos.name}`;
+        } catch (error) {
+          limpiarCampos();
+          console.error(error);
+          alert("No se pudo conectar con la API.");
+        }
+      }
+    </script>
+  </body>
+</html>

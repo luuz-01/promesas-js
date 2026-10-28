@@ -1,0 +1,20 @@
+/* CAPA 1: colores naranja y azul del tema de Dragon Ball */
+:root {
+  --fondo: #281d19;
+  --brillo: #6b3515;
+  --panel: #fffaf3;
+  --encabezado: #fff0dc;
+  --campo: #fffdf9;
+  --texto: #30251d;
+  --texto-suave: #705d4d;
+  --acento: #e87622;
+  --acento-hover: #f39343;
+  --borde: #e6c9a9;
+  --anillo: #e8762244;
+  --boton-texto: #ffffff;
+}
+
+.marco-imagen {
+  /* CAPA 2: fondo decorativo para la imagen del personaje */
+  background: linear-gradient(145deg, #eaf2ff, #fff1df);
+}

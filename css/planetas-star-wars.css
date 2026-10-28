@@ -1,0 +1,17 @@
+/* CAPA 1: colores del tema de planetas de Star Wars */
+:root {
+  --fondo: #101827;
+  --brillo: #183b54;
+  --panel: #172536;
+  --encabezado: #1c3044;
+  --campo: #101c2a;
+  --texto: #f1f6fa;
+  --texto-suave: #b4c5d3;
+  --acento: #65c7e8;
+  --acento-hover: #91d9ef;
+  --borde: #38546a;
+  --anillo: #65c7e844;
+  --boton-texto: #10212b;
+}
+
+/* CAPA 2: las medidas y componentes vienen del CSS común */
